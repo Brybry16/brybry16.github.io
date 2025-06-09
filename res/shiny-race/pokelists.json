@@ -288,7 +288,7 @@
   },
   {
     "slug": "ev-dlc",
-    "name": "Écarlate/Violet (+ DLC)",
+    "name": "Écarlate/Violet + DLC (no starters)",
     "normal": {
       "list": [
         "gourmelet",
@@ -701,7 +701,7 @@
   },
   {
     "slug": "ev-dlc-starters",
-    "name": "Écarlate/Violet (+ DLC w/starters)",
+    "name": "Écarlate/Violet + DLC (full)",
     "normal": {
       "list": [
         "gourmelet",
