@@ -1,6 +1,7 @@
 [
   {
-    "name": "ev",
+    "slug": "ev",
+    "name": "Écarlate/Violet (Paldea)",
     "normal": {
       "list": [
         "Gourmelet",
@@ -286,7 +287,8 @@
     "useNormalAsSpecial": true
   },
   {
-    "name": "ev-dlc",
+    "slug": "ev-dlc",
+    "name": "Écarlate/Violet (+ DLC)",
     "normal": {
       "list": [
         "Gourmelet",
@@ -722,7 +724,8 @@
     "useNormalAsSpecial": true
   },
   {
-    "name": "arceus-pt",
+    "slug": "arceus-pt",
+    "name": "Légendes Pokémon : Arceus",
     "normal": {
       "list": [
         "Brindibou",
