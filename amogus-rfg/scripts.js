@@ -42,7 +42,7 @@ function emptyLog() {
 
 function startSocket() {
     serverIPInput.disabled = true;
-    let address = "ws://" + serverIPInput.value === '' ? `${SERVER_ADDR}:${DEFAULT_PORT}` : `${serverIPInput.value + (serverIpInput.value.indexOf(':') === -1 ? ':' + DEFAULT_PORT : '')}`;
+    let address = "ws://" + serverIPInput.value === '' ? `${SERVER_ADDR}:${DEFAULT_PORT}` : `${serverIPInput.value + (serverIPInput.value.indexOf(':') === -1 ? ':' + DEFAULT_PORT : '')}`;
     socket = new WebSocket(address);
 
     socket.onerror = (error) => {
