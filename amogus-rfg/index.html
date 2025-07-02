@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Among Us Socket Interface</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1>Among Us Socket Interface</h1>
+    <div id="serverDiv">
+        <button onclick="startSocketClick()">Connexion au serveur</button>
+        <button onclick="stopSocket()">Déconnexion</button>
+        <button onclick="emptyLog()">Vider les logs</button><br /><br />
+        <label for="serverIPInput">Adresse IP de l'hôte: </label><input type="text" id="serverIPInput" placeholder="127.0.0.1:8080" value="" />
+    </div>
+    <div id="specControlsDiv" style="display: none;">
+        <h2>Controles des spectateurs</h2>
+        <input type="range" id="zoomRange" name="zoomRange" list="zoomMarkers" min="0" max="9" step="1" value="0" /> <button id="zoomBtn" onclick="setZoom()">Définir le zoom</button>
+
+        <datalist id="zoomMarkers">
+            <option value="0"></option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+            <option value="5"></option>
+            <option value="6"></option>
+            <option value="7"></option>
+            <option value="8"></option>
+            <option value="9"></option>
+        </datalist>
+    </div>
+    <div id="gamemodeDiv" style="display: none;">
+        <h3>Définir les spectateurs</h3>
+        <button onclick="refreshClientsList()">Rafraîchir la liste des joueurs</button> <br /><br />
+        <div id="clientsDiv"></div>
+        <h3>Changer le mode de jeu</h3>
+        <div id="modeBtnDiv">
+            <button id="btnNone" onclick="changeGameMode('none')" data-mode="none" class="togglableBtn pressed">Aucun</button>
+            <button id="btnCestsus" onclick="changeGameMode('cestsus')" data-mode="cestsus" class="togglableBtn">C'est sus</button>
+            <button id="btnAgentdouble" onclick="changeGameMode('agentdouble')" data-mode="agentdouble" class="togglableBtn">Agent Double</button>
+            <button id="btnAvelechat" onclick="changeGameMode('avelechat')" data-mode="avelechat" class="togglableBtn">Ave le chat</button>
+            <button id="brnToituvistoitucreves" onclick="changeGameMode('toituvistoitutcreves')" data-mode="toituvistoitutcreves" class="togglableBtn">Toi tu vis, toi tu crèves</button>
+        </div>
+    </div>
+    <div id="gameControlDiv"></div>
+    <pre id="log"></pre>
+
+    <script src="scripts.js" type="text/javascript"></script>
+</body>
+</html>
