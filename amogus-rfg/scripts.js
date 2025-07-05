@@ -177,13 +177,17 @@ function updateGameStatus(data) {
 
 function setGameStarted() {
 	prevGameStatusStarted = true;
-	addLog("[BUTTONS] Envoi des boutons de début de partie (Mute All)");
-	fetch("http://192.168.10.250:8000/api/location/5/2/0/step?step=1", {
-		method: "POST"
-	});
-	fetch("http://192.168.10.250:8000/api/location/5/2/0/press", {
-		method: "POST"
-	});
+	
+	setTimeout(() =>  {
+		addLog("[BUTTONS] Envoi des boutons de début de partie (Mute All)");
+		fetch("http://192.168.10.250:8000/api/location/5/2/0/step?step=1", {
+			method: "POST"
+		});
+		fetch("http://192.168.10.250:8000/api/location/5/2/0/press", {
+			method: "POST"
+		});
+	}, 8000);
+	
 	setTimeout(() =>  {
 		addLog("[ZOOM] Mise à jour du zoom des specs");
 		setZoom();
