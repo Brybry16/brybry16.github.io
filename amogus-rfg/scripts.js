@@ -1,6 +1,6 @@
 const log = document.getElementById('log');
 const DEFAULT_PORT = 80;
-const SERVER_ADDR = '192.168.10.195';
+const SERVER_ADDR = '192.168.10.164';
 let socketStopped = false;
 let socket;
 
