@@ -223,10 +223,6 @@ function setMeetingEnded() {
 	setZoom();
 }
 
-function pressControlBtn() {
-	
-}
-
 function showGamemodeControls(doShow) {
     doShow ? gamemodeDiv.style.display = 'block' : gamemodeDiv.style.display = 'none';
 }
@@ -272,7 +268,7 @@ function setupAgentDoubleControls(data) {
 
     controlsDiv.innerHTML += "<p>Prochaine compétence: " + getNextPerk(data.impostorPerks) + "</p>\n";
 
-    if(data.isMeeting) return;
+    //if(data.isMeeting) return;
 
     controlsDiv.innerHTML += `<h2>Tuer un crewmate</h2>\n`;
     data.players.forEach(player => {
@@ -310,7 +306,7 @@ function setupAveLeChatControls(data) {
     controlsDiv.innerHTML += "<h2>Finir une task</h2>\n";
     controlsDiv.innerHTML += `<button id="btnFinishTask" onclick="finishTask()" class="togglableBtn" ${data.isMeeting || data.tasksLeft === 0 ? "disabled" : ""}>Finir une task (${data.tasksLeft} restante${data.tasksLeft > 1 ? "s" : ""})</button>\n`;
 
-    if(!data.isMeeting) return;
+    //if(!data.isMeeting) return;
 
     controlsDiv.innerHTML += `<h2>Vote du chat</h2>\n`;
     data.players.forEach(player => {
@@ -341,7 +337,7 @@ function setupToituvistoitutcrevesControls(data) {
         controlsDiv.innerHTML += `<button id="btnCorrupt${player.id}" onclick="corrupt(${player.id})" class="togglableBtn ${player.isImpostor ? "pressed" : ""}"  ${player.isDead || player.isImpostor ? "disabled" : ""}>${player.name}</button>\n`;
     });
 
-    if(data.isMeeting) return;
+    //if(data.isMeeting) return;
 
     controlsDiv.innerHTML += `<h2>Tuer un crewmate</h2>\n`;
     data.players.forEach(player => {
