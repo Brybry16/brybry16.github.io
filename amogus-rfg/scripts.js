@@ -1,6 +1,6 @@
 const log = document.getElementById('log');
-const DEFAULT_PORT = 8080;
-const SERVER_ADDR = 'localhost';
+const DEFAULT_PORT = 80;
+const SERVER_ADDR = '192.168.10.164';
 let socketStopped = false;
 let socket;
 
@@ -13,6 +13,7 @@ let modeBtnDiv = document.getElementById('modeBtnDiv');
 
 let gameMode = 'none';
 let spectators = [];
+let gameStarted = false;
 
 let prevGameStatusStarted = false;
 
@@ -155,6 +156,71 @@ function updateGameStatus(data) {
     document.querySelectorAll('#clientsDiv .togglableBtn').forEach(btn => {
         btn.classList.toggle("pressed", spectators.includes(btn.dataset.clientId.toString()))
     });
+	
+	if(prevGameStatusStarted) {
+		if(!data.isStarted) {
+			setGameEnded();
+		}
+		else if(data.isMeeting) {
+			setMeetingStarted();
+		}
+		else if(!data.isMeeting) {
+			setMeetingEnded();
+		}
+	}
+	else {
+		if(data.isStarted) {
+			setGameStarted();
+		}
+	}
+}
+
+function setGameStarted() {
+	prevGameStatusStarted = true;
+	
+	setTimeout(() =>  {
+		addLog("[BUTTONS] Envoi des boutons de début de partie (Mute All)");
+		fetch("http://192.168.10.250:8000/api/location/5/2/0/step?step=1", {
+			method: "POST"
+		});
+		fetch("http://192.168.10.250:8000/api/location/5/2/0/press", {
+			method: "POST"
+		});
+	}, 8000);
+	
+	setTimeout(() =>  {
+		addLog("[ZOOM] Mise à jour du zoom des specs");
+		setZoom();
+	}, 12000);
+}
+
+function setGameEnded() {
+	prevGameStatusStarted = false;
+	addLog("[BUTTONS] Envoi des boutons de fin de partie (Demute all)");
+	fetch("http://192.168.10.250:8000/api/location/5/2/0/step?step=2", {
+		method: "POST"
+	});
+	fetch("http://192.168.10.250:8000/api/location/5/2/0/press", {
+		method: "POST"
+	});
+}
+
+function setMeetingStarted() {
+	addLog("[BUTTONS] Envoi du bouton de meeting (Demute All)");
+	setTimeout(() => {
+		fetch("http://192.168.10.250:8000/api/location/5/2/0/press", {
+			method: "POST"
+		});
+	}, 1000);
+}
+
+function setMeetingEnded() {
+	addLog("[BUTTONS] Envoi du bouton de fin de meeting (Mute All)");
+	fetch("http://192.168.10.250:8000/api/location/5/2/0/press", {
+		method: "POST"
+	});
+	addLog("[ZOOM] Mise à jour du zoom des specs");
+	setZoom();
 }
 
 function showGamemodeControls(doShow) {
@@ -202,7 +268,7 @@ function setupAgentDoubleControls(data) {
 
     controlsDiv.innerHTML += "<p>Prochaine compétence: " + getNextPerk(data.impostorPerks) + "</p>\n";
 
-    if(data.isMeeting) return;
+    //if(data.isMeeting) return;
 
     controlsDiv.innerHTML += `<h2>Tuer un crewmate</h2>\n`;
     data.players.forEach(player => {
@@ -240,7 +306,7 @@ function setupAveLeChatControls(data) {
     controlsDiv.innerHTML += "<h2>Finir une task</h2>\n";
     controlsDiv.innerHTML += `<button id="btnFinishTask" onclick="finishTask()" class="togglableBtn" ${data.isMeeting || data.tasksLeft === 0 ? "disabled" : ""}>Finir une task (${data.tasksLeft} restante${data.tasksLeft > 1 ? "s" : ""})</button>\n`;
 
-    if(!data.isMeeting) return;
+    //if(!data.isMeeting) return;
 
     controlsDiv.innerHTML += `<h2>Vote du chat</h2>\n`;
     data.players.forEach(player => {
@@ -271,7 +337,7 @@ function setupToituvistoitutcrevesControls(data) {
         controlsDiv.innerHTML += `<button id="btnCorrupt${player.id}" onclick="corrupt(${player.id})" class="togglableBtn ${player.isImpostor ? "pressed" : ""}"  ${player.isDead || player.isImpostor ? "disabled" : ""}>${player.name}</button>\n`;
     });
 
-    if(data.isMeeting) return;
+    //if(data.isMeeting) return;
 
     controlsDiv.innerHTML += `<h2>Tuer un crewmate</h2>\n`;
     data.players.forEach(player => {
