@@ -163,7 +163,7 @@
 	  "drawed": []
 	},
 	"special": null,
-	"userNormalAsSpecial": true
+	"useNormalAsSpecial": true
   },
   {
     "slug": "ev",
